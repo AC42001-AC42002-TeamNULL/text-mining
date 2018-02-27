@@ -8,10 +8,18 @@ Contained is the exercises given during the AC42001-AC42002 module for text-mini
 
 You will need Python==3.5 and [pipenv](https://docs.pipenv.org/) for python.
 
-You can install all requirements by running:
+You can install most requirements by running:
 
 ```python
 pipenv install
+```
+
+You will also have to download the nltk datasets by running this in a python console:
+
+```python
+import nltk
+
+nltk.download()
 ```
 
 To enter the pipenv shell run:

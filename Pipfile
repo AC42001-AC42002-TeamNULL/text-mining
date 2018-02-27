@@ -11,6 +11,7 @@ nltk = "*"
 numpy = "*"
 "beautifulsoup4" = "*"
 requests = "*"
+lxml = "*"
 
 
 [dev-packages]

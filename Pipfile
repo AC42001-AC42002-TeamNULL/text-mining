@@ -12,6 +12,8 @@ numpy = "*"
 "beautifulsoup4" = "*"
 requests = "*"
 lxml = "*"
+tweepy = "*"
+twython = "*"
 
 
 [dev-packages]

@@ -1,42 +1,75 @@
-import requests
-import bs4
+from tweepy import OAuthHandler, API
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
-from nltk.classify import NaiveBayesClassifier
 from nltk.sentiment import SentimentAnalyzer
+import string
+from itertools import chain
+from nltk.corpus import movie_reviews as mr
+from nltk.corpus import stopwords
+from nltk.probability import FreqDist
+from nltk.classify import NaiveBayesClassifier as nbc
+from nltk import word_tokenize, classify
+
+# Modified version of
+# https://stackoverflow.com/questions/21107075/classification-using-movie-review-corpus-in-nltk-python/21126594#21126594
+# Required changes due to using python3
+
+stop = stopwords.words('english')
+documents = [
+    ([w for w in mr.words(i) if w.lower() not in stop and w.lower() not in string.punctuation], i.split('/')[0]) for i
+    in mr.fileids()]
+
+word_features = FreqDist(chain(*[i for i, j in documents]))
+word_features = list(word_features.keys())[:100]
+
+numtrain = int(len(documents) * 90 / 100)
+mr_train = [({i: (i in tokens) for i in word_features}, tag) for tokens, tag in documents[:numtrain]]
+mr_test = [({i: (i in tokens) for i in word_features}, tag) for tokens, tag in documents[numtrain:]]
+
+mr_classifier = nbc.train(mr_train)
+
+print('Accuracy against movie review training set:')
+print(classify.accuracy(mr_classifier, mr_test), '\n')
+
+auth = OAuthHandler('', '')
+auth.set_access_token('', '')
+
+api = API(auth)
+
+user_timeline = api.user_timeline('stephenfry', count=1000)
 
 sentim_analyzer = SentimentAnalyzer()
-
-trainer = NaiveBayesClassifier.train
-
-res = requests.get(
-    'https://www.amazon.com/JBL-Everest-700-Around-Ear-Refurbished/product-reviews/B079DFZZ6C/ref=cm_cr_getr_d_paging_btm_2?ie=UTF8&reviewerType=all_reviews&pageNumber=1')
-res.raise_for_status()
-noStarchSoup = bs4.BeautifulSoup(res.text, 'lxml')
-
-linkElems = noStarchSoup.select('.review-text')
-
 sid = SentimentIntensityAnalyzer()
 
-length = len(linkElems)
+tweets = []
 
-imems = []
+for tweet in user_timeline:
+    ss = sid.polarity_scores(tweet.text)
+    label = ''
 
-for i in range(0, length):
-    ss = sid.polarity_scores(linkElems[i].getText())
-    print(linkElems[i].getText())
-    imems.append(linkElems[i].getText())
-    print(ss)
+    if ss['compound'] >= .5:
+        label = 'pos'
 
-# classifier = sentim_analyzer.train(trainer, imems)
-#
-# for key, value in sorted(sentim_analyzer.evaluate(imems).items()):
-#     print('{0}: {1}'.format(key, value))
+    if ss['compound'] <= -.5:
+        label = 'neg'
 
-train = [("Great place to be when you are in Bangalore.", "pos"),
-         ("The place was being renovated when I visited so the seating was limited.", "neg"),
-         ("Loved the ambience, loved the food", "pos"),
-         ("The food is delicious but not over the top.", "neg"),
-         ("Service - Little slow, probably because too many people.", "neg"),
-         ("The place is not easy to locate", "neg"),
-         ("Mushroom fried rice was spicy", "pos"),
-         ]
+    if -.5 < ss['compound'] < .5:
+        label = 'neu'
+
+    tweets.append([tweet.text, label])
+
+tweet_set = [(word_tokenize(sent), lab) for sent, lab in tweets]
+
+tweet_features = FreqDist(chain(*[f for f, g in tweet_set]))
+tweet_features = list(tweet_features.keys())[:100]
+
+tweet_train = [({i: (i in tokens) for i in tweet_features}, tag) for tokens, tag in tweet_set[:100]]
+tweet_test = [({i: (i in tokens) for i in tweet_features}, tag) for tokens, tag in tweet_set[100:]]
+
+tweet_classifier = nbc.train(tweet_train)
+
+print('Accuracy against twitter data set:')
+print(classify.accuracy(tweet_classifier, tweet_test), '\n')
+
+print('Cross classifier accuracy:')
+print('Tweet classifier on mr set', classify.accuracy(tweet_classifier, mr_test))
+print('Mr classifier on tweet set', classify.accuracy(mr_classifier, tweet_test))

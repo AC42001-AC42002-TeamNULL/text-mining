@@ -7,7 +7,7 @@ auth.set_access_token('', '')
 
 api = API(auth)
 
-user_timeline = api.user_timeline('stephenfry', count=3)
+user_timeline = api.user_timeline('stephenfry', count=100)
 
 sentim_analyzer = SentimentAnalyzer()
 sid = SentimentIntensityAnalyzer()

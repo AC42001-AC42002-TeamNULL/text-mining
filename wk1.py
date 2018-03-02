@@ -126,7 +126,7 @@ for review in man_test:
 
     reviews.append([review[0], label])
 
-man_set = [(word_tokenize(sent), lab) for sent, lab in reviews]
+man_set = [(word_tokenize(sent), lab) for sent, lab in man_test]
 
 man_features = FreqDist(chain(*[p for p, o in man_set]))
 man_features = list(man_features.keys())[:100]

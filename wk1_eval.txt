@@ -1,6 +1,7 @@
 Realistically the results aren't conclusive as it shows that sentiment analysis vastly outperforms machine learning,
-the classifier reports a self accuracy of roughly 15%, but the sentiment analyser correctly guesses in 61% of cases,
-however this is due to a variety of contributors, mainly small and limited data set.
+the classifier reports a self accuracy of roughly ~38%, but the sentiment analyser correctly guesses in 61% of cases,
+however this is due to a variety of contributors, mainly small and limited data set. Yet these are great results with
+such limited data.
 
 Sentiment analysis is easier to perform, requiring only the text where as machine learning the data has to be constructed
 into feature sets for the NLTK package. However sentiment analysis when examining compound scores requires

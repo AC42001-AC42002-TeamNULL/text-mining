@@ -1,0 +1,17 @@
+Classifier accuracy against twitter data set: 0.51875
+
+Classifier pos precision: 0.5177304964539007
+Classifier pos recall: 0.9358974358974359
+Classifier pos F-measure: 0.6666666666666666
+
+Classifier neg precision: 0.0
+Classifier neg recall: 0.0
+Classifier neg F-measure: 0
+
+Classifier neu precision: 0.5555555555555556
+Classifier neu recall: 0.16666666666666666
+Classifier neu F-measure: 0.25641025641025644
+
+Classifier accuracy against manual data set: 0.38461538461538464
+
+Sentiment analyser correct guess percentage: 61.53846153846154

@@ -39,3 +39,5 @@ Where `wk1.py` is the file you wish to run.
 ## Things to note
 
 Each file is self-contained and contains all the code for that weeks exercises. Hence a naming scheme of `wk` suffix week `1..4`.
+
+In addition you will need to be registered for a twitter dev account to access the twitter api via tweepy. Please see [here](https://developer.twitter.com/) for more details.

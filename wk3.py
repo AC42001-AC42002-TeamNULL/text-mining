@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import re
+from nltk import pos_tag, word_tokenize
 
 
 def get_review_texts(review_html):
@@ -28,8 +29,10 @@ def get_all_reviews(review_url):
 url = 'https://www.amazon.com/Play-Doh-Modeling-Compound-Exclusive-Non-Toxic/product-reviews/B00JM5GW10/?pageNumber='
 
 reviews = []
-for i in range(1, 30):
+for i in range(1, 2):
     url = url + str(i)
     reviews.extend(get_all_reviews(url))
 
-print(len(reviews), reviews[0])
+tok = word_tokenize(reviews[0])
+
+print(pos_tag(tok))

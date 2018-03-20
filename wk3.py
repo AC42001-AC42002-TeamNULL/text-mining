@@ -5,7 +5,6 @@ from nltk import pos_tag, word_tokenize
 
 
 def get_review_texts(review_html):
-    """Get all the reviews on a review page"""
     soup = BeautifulSoup(review_html, 'lxml')
     block = soup.find_all("span", class_="review-text")
     cleanr = re.compile('<.*?>')
@@ -19,7 +18,6 @@ def get_review_texts(review_html):
 
 
 def get_all_reviews(review_url):
-    """Get all the reviews, given a review page URL"""
     reviews = []
     review_html = requests.get(review_url).text
     reviews.extend(get_review_texts(review_html))

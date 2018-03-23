@@ -1,0 +1,21 @@
+Rule based approaches as some of the provided material states can be good measure for argument mining however,
+rule based approaches incurs some precursor knowledge and a sample data set which allows for argument processing. For example,
+Twitter data is typically unsuited without postprocessing to grab root tweet and related argument chains which might span multiple
+users and parse argument structure such that arguments are aligned and matched to the associated user.
+
+In this instance we used Amazon review data which are self-contained units and can be processed independent of other reviews.
+For this we decided to approach each argument structure by segmenting based on verb usage as our rule. Since we are only
+interested in something a user had experienced which would typically be expressed using a verb indicator. This is a broad approach as
+not every verb is a good indicator and could provide more or less random results on some datasets.
+
+This is a downside to rule based approaches, as using something like REGEX you can parse arguments on particular discourse markers
+which have strong indicators for argument structure for example: if, so, but, first. However this can lead to loss of information
+if proper grammar and spelling aren't maintained, eg. 1st vs first. Additionally, this is a manual process and requires additional
+background knowledge on the dataset to accurately formulate expected rules for extracting arguments and their structure.
+
+This downside though can be huge positive, as this is such a fine level of granularity with which you are changing essentially an input variable
+in your function, you have potentially unlimited control over the dataset processing stage as you can fine tune to the needs of
+the application.
+
+In conclusion, rule based approaches are time and work intensive but can offer a large increase in accuracy as rules can be fine
+tuned to the needs of the application being developed.

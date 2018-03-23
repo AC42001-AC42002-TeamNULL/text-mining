@@ -98,8 +98,8 @@ print('Using ' + rule + '. We correctly matched argument segments in ' + str(c_g
 #     owners_possessions = []
 #     for i in tags:
 #         if i[1] == "POS":
-#             owner = i[0].nbor(-1)
-#             possession = i[0].nbor(1)
+#             owner = i[0])
+#             possession = i[1]
 #             owners_possessions.append((owner, possession))
 #     print(owners_possessions)
 

@@ -1,0 +1,9 @@
+Team Members
+Iain Morton
+Anthony Grimes
+Christopher Sutherland
+
+In a machine learning text mining approach, we are aiming to teach the computer how to mine the text without programming explicit rules, unlike in systems such as rule-based text mining. By doing this, we teach the computer to identify patterns and information about the text without relying on specifying specific rules programmatically, building up a model based on labelled and/or unlabelled training samples.
+The potential to perform semi-supervised or unsupervised learning in the text mining area could provide a great opportunity to significantly decrease the time and financial cost of manually labelling textual training data, and finding a reliable machine learning method to perform this could provide great benefits in the area of text mining.
+One disadvantage of employing machine learning to text mining is the massively encompassing varieties of niceties involved with written text, providing a wide array of variables that any machine learning system will need to take into account, potentially making it difficult to get an exactly accurate result, depending on what sort of information you are wanting to extract from the data.
+A limitation of machine learning in many text mining contexts is the difficulty in training a model that would perform consistently strong text mining across domains. Ensuring that a model is not overly biased towards certain domains can be difficult, and this is one of the main limitations that is making large-scale text mining with machine learning a formidable challenge.
